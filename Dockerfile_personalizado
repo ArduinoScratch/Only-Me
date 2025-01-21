@@ -1,0 +1,21 @@
+# Usando sua imagem personalizada como base
+FROM customics:25.01
+
+# Crie o script inf-get diretamente no Dockerfile
+RUN echo '#!/bin/bash' > /usr/local/bin/inf-get \
+    && echo 'case "$1" in' >> /usr/local/bin/inf-get \
+    && echo '    update)' >> /usr/local/bin/inf-get \
+    && echo '        echo "Atualizando os repositórios..."' >> /usr/local/bin/inf-get \
+    && echo '        apt-get update' >> /usr/local/bin/inf-get \
+    && echo '        ;;' >> /usr/local/bin/inf-get \
+    && echo '    steel)' >> /usr/local/bin/inf-get \
+    && echo '        echo "Instalando $2..."' >> /usr/local/bin/inf-get \
+    && echo '        apt-get update && apt-get install -y $2' >> /usr/local/bin/inf-get \
+    && echo '        ;;' >> /usr/local/bin/inf-get \
+    && echo '    *)' >> /usr/local/bin/inf-get \
+    && echo '        echo "Comando desconhecido: $1"' >> /usr/local/bin/inf-get \
+    && echo '        ;;' >> /usr/local/bin/inf-get \
+    && echo 'esac' >> /usr/local/bin/inf-get
+
+# Torne o script executável
+RUN chmod +x /usr/local/bin/inf-get

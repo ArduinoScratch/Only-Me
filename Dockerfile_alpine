@@ -1,0 +1,10 @@
+RUN echo '#!/bin/sh\napk "$@"' > /usr/local/bin/ins \
+    && chmod +x /usr/local/bin/ins
+
+# Criar script personalizado para o comando creader (mkdir)
+RUN echo '#!/bin/sh\nmkdir "$@"' > /usr/local/bin/creader \
+    && chmod +x /usr/local/bin/creader
+
+# Criar script personalizado para o comando fillow (touch)
+RUN echo '#!/bin/sh\ntouch "$@"' > /usr/local/bin/fillow \
+    && chmod +x /usr/local/bin/fillow
